@@ -3,11 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
-	public string playScenen = "Play";
+	public string playScene = "Diary";
+    public string diaryScene = "Diary";
     public SceneFader sceneFader;
 
-	public void Play ()
+	public void play ()
 	{
-		sceneFader.FadeTo(playScenen);
+		sceneFader.FadeTo(playScene);
 	}
+    public void gotoDiary()
+    {
+        sceneFader.FadeTo(diaryScene);
+    }
 }
