@@ -15,6 +15,7 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples.Common
         public int SetCountValue { get { return int.Parse(countText.text); } }
 		public int ScrollToValue { get { return int.Parse(scrollToText.text); } }
 
+        public int exp = 0;
         private void Start()
         {
 

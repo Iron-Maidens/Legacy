@@ -23,7 +23,22 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples
 		Dictionary<RectTransform, SimpleExpandableClientViewsHolder> _MapRootToViewsHolder = new Dictionary<RectTransform, SimpleExpandableClientViewsHolder>();
 
         int index = 1, baseindex = 7;
- 
+
+        int level = 1;
+
+        public int reqLevel2;
+        public int reqLevel3;
+        public int reqLevel4;
+        public int reqLevel5;
+        public int reqLevel6;
+        public int reqLevel7;
+        public int reqLevel8;
+        public int reqLevel9;
+
+        int requireExp;
+
+        public Text level_text;
+        public Text exp_text;
 
         #region ClassicSRIA implementation
         protected override void Awake()
@@ -40,7 +55,8 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples
 
             ChangeModelsAndReset(demoUI.SetCountValue);
 
-			demoUI.setCountButton.onClick.AddListener(OnItemCountChangeRequested);
+            requireExp = reqLevel2;
+            demoUI.setCountButton.onClick.AddListener(OnItemCountChangeRequested);
 			demoUI.scrollToButton.onClick.AddListener(OnScrollToRequested);
 			demoUI.addOneTailButton.onClick.AddListener(() => OnAddItemRequested(true));
 			demoUI.addOneHeadButton.onClick.AddListener(() => OnAddItemRequested(false));
@@ -138,7 +154,9 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples
 
 		ExpandableSimpleClientModel CreateNewModel(int index)
 		{
-			var model = new ExpandableSimpleClientModel()
+            level_text.text = "Level " + level;
+            exp_text.text = "Next Level" + demoUI.exp + " / " + requireExp;
+            var model = new ExpandableSimpleClientModel()
 			{
 				clientName = sampleFirstNames[CUtil.Rand(sampleFirstNames.Length)],
 				location = sampleLocations[CUtil.Rand(sampleLocations.Length)],
@@ -146,9 +164,42 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples
 				nonExpandedSize = _PrefabLayoutElement.preferredHeight
 			};
 			model.SetRandom();
-            
-           
-			return model;
+            demoUI.exp += 1;
+            Debug.Log(demoUI.exp);
+            ChangeLevel();
+
+            return model;
 		}
-	}	
+
+        void ChangeLevel()
+        {
+            if (demoUI.exp >= reqLevel2 && level == 1)
+            {
+                requireExp = reqLevel3;
+                level = 2;
+                Debug.Log("level up" + level);
+            }
+            else if (demoUI.exp >= reqLevel3 && level == 2)
+            {
+                requireExp = reqLevel4;
+                level = 3;
+                Debug.Log("level up" + level);
+            }
+            else if (demoUI.exp >= reqLevel4 && level == 3)
+            {
+                requireExp = reqLevel5;
+                level = 4;
+                Debug.Log("level up" + level);
+            }
+            else if (demoUI.exp >= reqLevel5 && level == 4)
+            {
+                //requireExp = reqLevel6;
+                level = 5;
+                Debug.Log("level up" + level);
+            }
+            level_text.text = "Level " + level;
+            exp_text.text = "Next Level : " + demoUI.exp + " / " + requireExp;
+
+        }
+    }	
 }
