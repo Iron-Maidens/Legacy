@@ -8,24 +8,27 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples.Common
 	{
 		public LayoutElement layoutElement;
 		public Image averageScoreFillImage;
+        public Image avatar;
 		public Text nameText, locationText, averageScoreText;
 		public RectTransform availability01Slider, contractChance01Slider, longTermClient01Slider;
 		public Text statusText;
 
 
 		/// <inheritdoc/>
+        /// 
 		public override void CollectViews()
 		{
 			base.CollectViews();
 
 			layoutElement = root.GetComponent<LayoutElement>();
 
-			var mainPanel = root.GetChild(0);
+		    var mainPanel = root.GetChild(0);
 			statusText = mainPanel.Find("AvatarPanel/StatusText").GetComponent<Text>();
 			nameText = mainPanel.Find("NameAndLocationPanel/NameText").GetComponent<Text>();
 			locationText = mainPanel.Find("NameAndLocationPanel/LocationText").GetComponent<Text>();
+            avatar = mainPanel.Find("AvatarPanel").GetComponent<Image>();
 
-			var ratingPanel = root.Find("RatingPanel/Panel").GetComponent<RectTransform>();
+            var ratingPanel = root.Find("RatingPanel/Panel").GetComponent<RectTransform>();
 			averageScoreFillImage = ratingPanel.Find("Foreground").GetComponent<Image>();
 			averageScoreText = ratingPanel.Find("Text").GetComponent<Text>();
 
@@ -34,13 +37,15 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples.Common
 			contractChance01Slider = ratingBreakdownPanel.Find("ContractChancePanel/Slider").GetComponent<RectTransform>();
 			longTermClient01Slider = ratingBreakdownPanel.Find("LongTermClientPanel/Slider").GetComponent<RectTransform>();
 		}
-
-		public virtual void UpdateViews(TClientModel dataModel)
+        public virtual void UpdateViews(TClientModel dataModel)
 		{
 			nameText.text = dataModel.clientName + "(#" + ItemIndex + ")";
 			locationText.text = "  " + dataModel.location;
-			UpdateScores(dataModel);
-			if (dataModel.isOnline)
+            avatar.sprite = dataModel.avatarPic;
+            
+
+            UpdateScores(dataModel);
+			/*if (dataModel.isOnline)
 			{
 				statusText.text = "Online";
 				statusText.color = Color.green;
@@ -49,7 +54,7 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples.Common
 			{
 				statusText.text = "Offline";
 				statusText.color = Color.white * .8f;
-			}
+			}*/
 		}
 
 		void UpdateScores(SimpleClientModel dataModel)

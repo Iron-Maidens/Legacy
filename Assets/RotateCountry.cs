@@ -16,6 +16,6 @@ public class RotateCountry : MonoBehaviour
     }
     public void rotateRight()
     {
-        imgContries.transform.Rotate(Vector3.fwd * 36f);
+        imgContries.transform.Rotate( Vector3.forward * 36f);
     }
 }	

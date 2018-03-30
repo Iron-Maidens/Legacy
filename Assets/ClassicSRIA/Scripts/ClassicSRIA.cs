@@ -18,6 +18,7 @@ namespace frame8.ScrollRectItemsAdapter.Classic
 		public LayoutGroup ContentLayoutGroup { get; private set; }
 		public RectTransform ScrollRectRT { get; private set; }
 		public bool IsHorizontal { get { return ScrollRectComponent.horizontal; } }
+
 		/// <summary> 1f = start; 0f = end </summary>
 		public float AbstractNormalizedPosition
 		{
@@ -197,7 +198,7 @@ namespace frame8.ScrollRectItemsAdapter.Classic
 			}
 		}
 
-		void AddItemsAndUpdateIndices(int index, int count)
+		public void AddItemsAndUpdateIndices(int index, int count)
 		{
 			int lastIndexExcl = index + count;
 			for (int i = index; i < lastIndexExcl; ++i)

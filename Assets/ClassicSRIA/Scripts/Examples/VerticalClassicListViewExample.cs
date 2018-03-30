@@ -14,29 +14,31 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples
 		public RectTransform itemPrefab;
 		public string[] sampleFirstNames;//, sampleLastNames;
 		public string[] sampleLocations;
-		public DemoUI demoUI;
-
+        public Sprite[] sampleAvatar;
+        public DemoUI demoUI;
 		public List<ExpandableSimpleClientModel> Data { get; private set; }
-
+        public static int countIndex;
 		LayoutElement _PrefabLayoutElement;
 		// Used to quickly retrieve the views holder given the gameobject
 		Dictionary<RectTransform, SimpleExpandableClientViewsHolder> _MapRootToViewsHolder = new Dictionary<RectTransform, SimpleExpandableClientViewsHolder>();
 
+        int index = 1, baseindex = 7;
+ 
 
-		#region ClassicSRIA implementation
-		protected override void Awake()
+        #region ClassicSRIA implementation
+        protected override void Awake()
 		{
 			base.Awake();
 
 			Data = new List<ExpandableSimpleClientModel>();
 			_PrefabLayoutElement = itemPrefab.GetComponent<LayoutElement>();
 		}
-
+       
 		protected override void Start()
 		{
 			base.Start();
 
-			ChangeModelsAndReset(demoUI.SetCountValue);
+            ChangeModelsAndReset(demoUI.SetCountValue);
 
 			demoUI.setCountButton.onClick.AddListener(OnItemCountChangeRequested);
 			demoUI.scrollToButton.onClick.AddListener(OnScrollToRequested);
@@ -46,6 +48,11 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples
 			demoUI.removeOneHeadButton.onClick.AddListener(() => OnRemoveItemRequested(false));
 
 			StartCoroutine(DelayedClick());
+            for(int i = index;i<= baseindex;i++)
+            {
+                OnAddItemRequested(true);
+            }
+
 		}
 
 		IEnumerator DelayedClick()
@@ -67,15 +74,18 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples
 		}
 
 		protected override void UpdateViewsHolder(SimpleExpandableClientViewsHolder vh) { vh.UpdateViews(Data[vh.ItemIndex]); }
-		#endregion
+        #endregion
 
-		#region events from DrawerCommandPanel
-		void OnAddItemRequested(bool atEnd)
+        #region events from DrawerCommandPanel
+        void OnAddItemRequested(bool atEnd)
 		{
 			int index = atEnd ? Data.Count : 0;
+            countIndex = Data.Count;
+           // Debug.Log("Index "+Data.Count);
 			Data.Insert(index, CreateNewModel(index));
 			InsertItems(index, 1, demoUI.freezeContentEndEdge.isOn);
 		}
+
 		void OnRemoveItemRequested(bool fromEnd)
 		{
 			if (Data.Count == 0)
@@ -132,10 +142,12 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples
 			{
 				clientName = sampleFirstNames[CUtil.Rand(sampleFirstNames.Length)],
 				location = sampleLocations[CUtil.Rand(sampleLocations.Length)],
+                avatarPic = sampleAvatar[Data.Count],
 				nonExpandedSize = _PrefabLayoutElement.preferredHeight
 			};
 			model.SetRandom();
-
+            
+           
 			return model;
 		}
 	}	

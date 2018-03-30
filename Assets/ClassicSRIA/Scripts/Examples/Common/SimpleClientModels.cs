@@ -1,12 +1,16 @@
 ﻿
+using UnityEngine.UI;
+using UnityEngine;
 
 namespace frame8.ScrollRectItemsAdapter.Classic.Examples.Common
 {
 	public class SimpleClientModel
 	{
 		public string clientName;
-		public string location;
-		public float availability01, contractChance01, longTermClient01;
+        public string location;
+        public Sprite avatarPic;
+
+        public float availability01, contractChance01, longTermClient01;
 		public bool isOnline;
 
 		public float AverageScore01 { get { return (availability01 + contractChance01 + longTermClient01) / 3; } }
@@ -19,7 +23,6 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples.Common
 			isOnline = CUtil.Rand(2) == 0;
 		}
 	}
-
 
 	public class ExpandableSimpleClientModel : SimpleClientModel
 	{

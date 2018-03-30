@@ -16,7 +16,8 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Util
 		/// </summary>
 		[Tooltip("will be taken from this object, if not specified")]
         public Button button;
-
+        public Image objSelected;
+     
         /// <summary>When expanding, the initial size will be <see cref="nonExpandedSize"/> and the target size will be <see cref="nonExpandedSize"/> x <see cref="expandFactor"/>; opposite is true when collapsing</summary>
 		[NonSerialized] // must be set through code
         public float expandFactor = 2f;
@@ -57,7 +58,9 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Util
 
         public void OnClicked()
         {
-           /* if (animating)
+           
+          
+            if (animating)
                 return;
 
             if (nonExpandedSize < 0f)
@@ -76,12 +79,13 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Util
             {
                 startSize = nonExpandedSize;
                 endSize = nonExpandedSize * expandFactor;
-            }*/
+            }
         }
 
 
         void Update()
         {
+            
             if (animating)
             {
                 float elapsedTime = Time.time - animStart;
