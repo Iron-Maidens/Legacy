@@ -40,6 +40,7 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Examples
         public Text level_text;
         public Text exp_text;
 
+
         #region ClassicSRIA implementation
         protected override void Awake()
 		{

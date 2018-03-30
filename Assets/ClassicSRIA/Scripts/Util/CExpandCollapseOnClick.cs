@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 namespace frame8.ScrollRectItemsAdapter.Classic.Util
 {
@@ -33,7 +34,7 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Util
         [HideInInspector]
         public bool expanded;
 
-		public UnityFloatEvent onExpandAmounChanged;
+        public UnityFloatEvent onExpandAmounChanged;
 
 		float startSize;
         float endSize;
@@ -58,8 +59,8 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Util
 
         public void OnClicked()
         {
-           
-          
+
+            /*
             if (animating)
                 return;
 
@@ -80,6 +81,8 @@ namespace frame8.ScrollRectItemsAdapter.Classic.Util
                 startSize = nonExpandedSize;
                 endSize = nonExpandedSize * expandFactor;
             }
+            */
+            Debug.Log(gameObject.GetComponent<Image>());
         }
 
 
